@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="col l4" ng-repeat="f in filieres">
+            <div class="card">
+                <div class="card-content blue white-text">
+                    <span class="card-title">{{f.libelle}}</span>
+                </div>
+                <div class="card-action">
+                    <ul class="collection">
+                        <li class="collection-item">Année: {{f.annee}}</li>
+                        <li class="collection-item">Mention: {{f.mention}}</li>
+                        <li class="collection-item">Effectif: <span class="bold">{{f.effectif}}</span></li>
+                    </ul>
+                    <a href="" class="btn waves-effect waves-light blue">Diviser</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+    /*Ce fichier CSS ne se contente que de charger les polices*/
+    
+    @font-face {
+        font-family: 'OS Regular';
+        src: url("../fonts/open-sans/OpenSans-Regular.ttf");
+    }
+    
+    @font-face {
+        font-family: 'Exo2 BlackItalic';
+        src: url("../fonts/open-sans/Exo2-BlackItalic.otf");
+    }
+    
+    @font-face {
+        font-family: 'OS Light';
+        src: url("../fonts/open-sans/OpenSans-Light.ttf");
+    }
+    
+    @font-face {
+        font-family: 'OS Semi-Bold';
+        src: url("../fonts/open-sans/OpenSans-Semibold.ttf");
+    }
+    
+    @font-face {
+        font-family: 'Exo2 Regular';
+        src: url("../fonts/open-sans/Exo2-Regular.otf");
+    }
+    /*Work Sans*/
+    
+    @font-face {
+        font-family: 'Work Regular';
+        src: url("../fonts/worksans/WorkSans-Regular.ttf");
+    }
+    
+    @font-face {
+        font-family: 'Work Black';
+        src: url("../fonts/worksans/WorkSans-Black.ttf");
+    }
+    /*Bitter*/
+    
+    @font-face {
+        font-family: 'Bitter Italic';
+        src: url("../fonts/bitter/Bitter-Italic.ttf");
+    }
+    
+    @font-face {
+        font-family: 'Bitter Bold';
+        src: url("../fonts/bitter/Bitter-Bold.ttf");
+    }
+    
+    @font-face {
+        font-family: 'Bitter Regular';
+        src: url("../fonts/bitter/Bitter-Regular.ttf");
+    }

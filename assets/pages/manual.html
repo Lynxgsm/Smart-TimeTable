@@ -1,0 +1,154 @@
+<div class="container">
+    <div class="row">
+        <div class="step1">
+            <div class="col s4 l4 m4">
+                <label for="filiere">Filière</label>
+                <div input-field>
+                    <select ng-change="loadCours(filieres.default)" ng-model="filieres.default" id="filiere" material-select>
+                    <option disabled selected>Filière...</option>
+                    <option ng-repeat="value in filieres.choices">{{value.nom}}</option>
+                </select>
+                </div>
+            </div>
+            <div class="col s4 l4 m4">
+                <label for="cours">Cours</label>
+                <div input-field>
+                    <select id="cours" material-select ng-model="cours.value">
+                    <option disabled selected>Cours...</option>
+                    <option ng-repeat="value in cours.choices">{{value.libelle}}</option>
+                </select>
+                </div>
+            </div>
+        </div>
+        <div class="step2">
+            <div class="col s4 l4 m4">
+                <label for="salle">Salle</label>
+                <div input-field>
+                    <select ng-model="salles.value" id="salle" ng-change="getCount(salles.capacite)" material-select>
+                    <option disabled selected>Salle...</option>
+                    <option data-count="{{value.capacite}}" ng-repeat="value in salles.choices">{{value.nom}}</option>
+                </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col l4 m4 s4">
+                <label for="">Jour</label>
+                <input type="date" class="datepicker" ng-model="dateJ">
+            </div>
+            <div class="col l4 m4 s4">
+                <label for="">Heure début</label>
+                <input type="date" id="heureDebut" class="timepicker">
+            </div>
+            <div class="col l4 m4 s4">
+                <label for="">Heure fin</label>
+                <input type="date" id="heureFin" class="timepicker">
+            </div>
+            <div class="center">
+                <button class="black btn waves-effect waves-light" id="ajouter">Ajouter</button>
+            </div>
+        </div>
+        <br>
+        <table class="bordered centered">
+            <thead>
+                <tr>
+                    <th class="tab" data-selected="Lun" data-row="0">Lundi</th>
+                    <th class="tab" data-selected="Mar" data-row="1">Mardi</th>
+                    <th class="tab" data-selected="Mer" data-row="2">Mercredi</th>
+                    <th class="tab" data-selected="Jeu" data-row="3">Jeudi</th>
+                    <th class="tab" data-selected="Ven" data-row="4">Vendredi</th>
+                    <th class="tab" data-selected="Sam" data-row="5">Samedi</th>
+                </tr>
+            </thead>
+            <tbody id="empty">
+                <tr id="line1">
+                    <td class="row0"></td>
+                    <td class="row1"></td>
+                    <td class="row2"></td>
+                    <td class="row3"></td>
+                    <td class="row4"></td>
+                    <td class="row5"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    var line = 0;
+    var exists = {
+        "line": 0,
+        "row": 0
+    }
+
+    $(document).ready(function() {
+        console.log(moment().startOf('week'));
+
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year
+            onClose: function() {
+                $('.tab').removeClass('teal white-text');
+                for (i = 0; i < $('.tab').length; i++) {
+                    if ($('.tab:nth(' + i + ')').data('selected') === $('.picker__weekday-display').text().substring(0, 3)) {
+                        $('.tab:nth(' + i + ')').addClass('teal white-text');
+                    }
+                }
+            }
+        });
+
+        $('.timepicker').pickatime({
+            default: 'now', // Set default time
+            fromnow: 0, // set default time to * milliseconds from now (using with default = 'now')
+            twelvehour: false, // Use AM/PM or 24-hour format
+            donetext: 'OK', // text for done-button
+            cleartext: 'Effacer', // text for clear-button
+            canceltext: 'Annuler', // Text for cancel-button
+            autoclose: false, // automatic close timepicker
+            ampmclickable: true, // make AM PM clickable
+            aftershow: function() {} //Function for after opening timepicker  
+        })
+    })
+
+    $('#salle').change(function() {
+        console.log($(this).data('count'));
+    })
+
+    $('#ajouter').click(function() {
+        var row = 0;
+        var line = 1;
+        var added = false;
+        for (i = 0; i < $('.tab').length; i++) {
+            if ($('.tab:nth(' + i + ')').hasClass('teal white-text')) {
+                row = $('.tab:nth(' + i + ')').data('row');
+                while (added === false) {
+                    if ($('#line' + line + ' .row' + row).text() === "") {
+                        $('#line' + line + ' .row' + row).append('<p>(' + $('#heureDebut').val() + '-' + $('#heureFin').val() + ')</p><p>' + $('#cours').val() + '</p><p>(' + $('#filiere').val() + ')</p>')
+                        $('#heureDebut').val($('#heureFin').val());
+                        added = true;
+                    } else {
+                        line++;
+                        console.log("Line: " + $('#line' + line).length);
+
+                        $('#empty').append(`<tr id="line` + line + `">
+                        <td class="row0"></td>
+                        <td class="row1"></td>
+                        <td class="row2"></td>
+                        <td class="row3"></td>
+                        <td class="row4"></td>
+                        <td class="row5"></td>
+                    </tr>`);
+
+                        added = false;
+                    }
+
+                }
+
+                break;
+            }
+        }
+    });
+
+    function checkEmpty() {
+
+    }
+</script>

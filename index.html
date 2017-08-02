@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>IUGM Smart TimeTable</title>
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/materialize.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/materialize-stepper.css">
+    <link rel="stylesheet" href="assets/css/loader.css">
+    <link rel="stylesheet" href="assets/css/font.css">
+    <script src="assets/js/libraries/jquery.min.js"></script>
+    <script src="assets/js/libraries/owl.carousel.min.js"></script>
+    <script src="assets/js/libraries/angular.min.js"></script>
+    <script src="assets/js/libraries/angular-route.js"></script>
+    <script src="assets/js/libraries/materialize.js"></script>
+    <script src="assets/js/libraries/moment.js"></script>
+    <script src="assets/js/libraries/angular-materialize.min.js"></script>
+    <script src="assets/js/libraries/materialize-stepper.js"></script>
+    <script src="assets/js/libraries/app.js"></script>
+    <script src="assets/js/script.js"></script>
+    <style>
+        #fullpage {
+            display: none;
+        }
+    </style>
+</head>
+
+<body ng-controller="mainController">
+    <div id="loader">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <div id="fullpage">
+        <div class="navbar-fixed">
+            <nav class="teal">
+                <ul id="dropdown1" class="dropdown-content">
+                    <li><a href="#!" ng-click="disconnect()">Se deconnecter</a></li>
+                </ul>
+                <div class="nav-wrapper">
+                    <a href="#!" class="brand-logo white-text">Emploi du Temps</a>
+                    <a href="#" class="button-collapse" data-activates="nav-mobile" data-sidenav="left" data-menuwidth="500" data-closeonclick="false"><span class="fa fa-bars"></span></a>
+                    <ul class="left hide-on-med-and-down">
+                        <li><a ng-click="goBack()" ng-show="back===true"><span class="fa fa-arrow-left"></span></a></li>
+                    </ul>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="#enseignant"><span class="fa fa-user"></span> Enseignants</a></li>
+                        <li><a href="#matiere"><span class="fa fa-bookmark"></span> Matieres</a></li>
+                        <li><a href=""><span class="fa fa-home"></span> Salles</a></li>
+                        <li><a href=""><span class="fa fa-book"></span> Filières</a></li>
+                        <li><a href="#get"><span class="fa fa-table"></span> Emploi du temps</a></li>
+                        <li><a href="#groupe"><span class="fa fa-users"></span> Groupe d'étudiants</a></li>
+                        <li><a href="#history"><span class="fa fa-history"></span> Historique</a></li>
+                    </ul>
+                    <ul class="side-nav" id="nav-mobile">
+                        <li><a href="#enseignant"><span class="fa fa-user"></span> Enseignants</a></li>
+                        <li><a href="#matiere"><span class="fa fa-bookmark"></span> Matieres</a></li>
+                        <li><a href=""><span class="fa fa-home"></span> Salles</a></li>
+                        <li><a href=""><span class="fa fa-book"></span> Filières</a></li>
+                        <li><a href="#get"><span class="fa fa-table"></span> Emploi du temps</a></li>
+                        <li><a href="#groupe"><span class="fa fa-users"></span> Groupe d'étudiants</a></li>
+                        <li><a href="#history"><span class="fa fa-history"></span> Historique</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <br>
+        <div ng-view class="animate fadeIn"></div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#loader').hide();
+            $('#fullpage').css('display', 'block');
+        })
+    </script>
+</body>
+
+
+</html>

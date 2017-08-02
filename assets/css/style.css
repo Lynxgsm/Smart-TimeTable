@@ -1,0 +1,23 @@
+body,
+th,
+td {
+    font-family: sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Bitter Regular";
+}
+
+#login {
+    width: 40vw;
+    transform: translateX(15vw) translateY(10vh);
+}
+
+.bold {
+    font-weight: bold;
+}

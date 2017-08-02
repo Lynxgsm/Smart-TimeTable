@@ -1,0 +1,123 @@
+<div class="container">
+    <div class="step1 animate fadeIn" ng-show="stepper===1">
+        <ul class="collection with-header">
+            <li class="collection-header">
+                <h4>1- Séléctionnez la mention</h4>
+            </li>
+        </ul>
+        <div class="container-fluid">
+            <div class="col s12 l12 m12">
+                <label for="mentions">Mention</label>
+                <div input-field>
+                    <select ng-model="mentions.default" id="mentions" material-select>
+                    <option disabled selected>Mention...</option>
+                    <option ng-repeat="value in mentions.choices">{{value.ID}}</option>
+                </select>
+                </div>
+                <div class="center">
+                    <button class="btn waves-effect waves-light" ng-click="getAnnee(mentions.default)">Continuer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="step2 animate fadeIn" ng-show="stepper===2 && divide===false">
+        <ul class="collection with-header">
+            <li class="collection-header">
+                <h4>2- Séléctionnez le niveau</h4>
+            </li>
+        </ul>
+        <div class="container">
+            <div class="col s6 l6 m6">
+                <label for="niveau">Niveau</label>
+                <div input-field>
+                    <select ng-model="annee.default" id="annee" material-select>
+                    <option disabled selected>Annee...</option>
+                    <option ng-repeat="value in annee.choices">{{value.annee}}</option>
+                </select>
+                </div>
+                <div class="center">
+                    <button class="btn waves-effect waves-light" ng-click="decrementStepper()">Revenir</button>
+                    <button class="btn waves-effect waves-light" ng-click="getFiliereByAnnee(annee.default, mentions.default)">Continuer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="step3 animate fadeIn" ng-show="stepper===3">
+        <ul class="collection with-header">
+            <li class="collection-header">
+                <h4>3- Emploi du temps</h4>
+            </li>
+        </ul>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col l4 m4 s4">
+                    <label for="filiere">Filières</label>
+                    <div input-field>
+                        <select multiple ng-change="getFiliereCount(filieres.default)" ng-model="filieres.default" id="filiere" material-select>
+                            <option disabled selected>Filières...</option>
+                            <option ng-repeat="value in filieres.choices">{{value.ID}} ({{value.effectif}})</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col l4 m4 s4">
+                    <label for="salle">Salle</label>
+                    <div input-field>
+                        <select ng-model="salles.default" ng-value="" ng-change="setSalleCapacity(salles.default)" id="salle" material-select>
+                            <option ng-repeat="value in salles.choices" value="{{value.ID}} ({{value.capacite}})">{{value.nom}} ({{value.capacite}})</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col l4 m4 s4">
+                    <label for="matiere">Matière</label>
+                    <div input-field>
+                        <select ng-model="matieres.default" id="matiere" material-select>
+                            <option ng-repeat="value in matieres.choices" value="{{value.ID}}">{{value.libelle}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col l12 m12 s12" ng-show="incapacity===true">
+                    <blockquote><i><strong>La salle ne peut contenir ce nombre d'étudiants. Il faudrait au moins diviser le nombre d'élèves par <span class="bold">{{groupe}}</span> groupes.</strong></i></blockquote>
+                </div>
+                <div class="controls" ng-show="incapacity===false">
+                    <div class="col l4 m4 s4">
+                        <label for="">Jour</label>
+                        <!-- <input id="datePick" type="date" class="datepicker" ng-change="loadTimetable()" ng-model="timetableDate"> -->
+                        <input input-date type="text" name="created" id="inputCreated" ng-model="currentTime" container="" format="yyyy-mm-dd" months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}" weekdays-letter="{{ weekdaysLetter }}"
+                            today="today" first-day="1" clear="clear" close="close" select-years="15" on-start="onStart()" on-render="onRender()" on-open="onOpen()" on-close="onClose()" on-set="onSet()" on-stop="onStop()" />
+                    </div>
+                    <div class="col l4 m4 s4">
+                        <label for="">Heure début</label>
+                        <input id="input_starttime" ng-model="heureDebut" input-clock data-twelvehour="false" type="text" on-open="onOpenTime()" on-close="onCloseTime()" on-set="onSetTime()" on-stop="onStopTime()">
+                    </div>
+                    <div class="col l4 m4 s4">
+                        <label for="">Heure fin</label>
+                        <input id="input_endtime" ng-model="heureFin" input-clock data-twelvehour="false" type="text">
+                    </div>
+                    <div class="center">
+                        <button class="black btn waves-effect waves-light" id="ajouter" ng-click="checkIfTimeIsAvailable()">Ajouter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Matiere</th>
+                        <th>Filière</th>
+                        <th>Salle</th>
+                        <th>Heure</th>
+                    </tr>
+                </thead>
+                <tbody id="timetable">
+                    <tr ng-repeat="c in cours">
+                        <td>{{c.matiere}}</td>
+                        <td>{{c.filiere}}</td>
+                        <td>{{c.salle}}</td>
+                        <td>({{c.heureDebut}} - {{c.heureFin}})</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

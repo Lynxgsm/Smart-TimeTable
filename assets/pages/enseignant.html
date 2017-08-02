@@ -1,0 +1,60 @@
+<h3 class="center">Liste des Enseignants</h3>
+<div class="container">
+    <div class="center">
+        <a class="btn-floating btn-large waves-effect waves-light black" ng-click="showAdd=!showAdd" ng-show="showAdd===false"><i class="fa fa-plus"></i></a>
+        <a class="btn-floating btn-large waves-effect waves-light red" ng-click="showAdd=!showAdd" ng-show="showAdd===true"><i class="fa fa-close"></i></a>
+    </div>
+    <br>
+    <div class="card animate fadeIn" ng-show="showAdd===true">
+        <div class="card-content">
+            <h4 class="center">Ajouter un Enseignant</h4>
+            <div class="row">
+                <div class="col l6 m6">
+                    <div class="input-field">
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" ng-model="nom">
+                    </div>
+                </div>
+                <div class="col l6 m6">
+                    <div class="input-field">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" id="prenom" ng-model="prenom">
+                    </div>
+                </div>
+                <div class="col l6 m6">
+                    <div class="input-field">
+                        <label for="mail">Email</label>
+                        <input type="text" id="mail" ng-model="email">
+                    </div>
+                </div>
+                <div class="col l6 m6">
+                    <div class="input-field">
+                        <label for="phone">Phone</label>
+                        <input type="text" id="phone" ng-model="phone">
+                    </div>
+                </div>
+                <div class="center">
+                    <button class="btn waves-effect waves-light" ng-click="insertEnseignant()">Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="bordered">
+        <thead>
+            <tr class="teal white-text">
+                <th>#</th>
+                <th><span class="fa fa-user"></span>&nbsp;Nom & Prénom</th>
+                <th><span class="fa fa-mail-forward"></span>&nbsp;E-mail</th>
+                <th><span class="fa fa-phone"></span>&nbsp;Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="e in enseignants">
+                <td>{{e.ID}}</td>
+                <td>{{e.nom}} {{e.prenom}}</td>
+                <td>{{e.mail}}</td>
+                <td>{{e.phone}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
